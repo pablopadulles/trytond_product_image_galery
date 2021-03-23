@@ -29,10 +29,20 @@ else:
     store_prefix = None
 
 
+class Template(metaclass=PoolMeta):
+    __name__ = 'product.template'
+
+    def get_image(self):
+        return self.products[0].get_image()
+
+
 class Product(metaclass=PoolMeta):
     __name__ = 'product.product'
 
     images = fields.One2Many('product.images', 'name', 'Galeria')
+
+    def get_image(self):
+        return self.images[0].get_img()
 
 
 class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
@@ -49,7 +59,7 @@ class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
     def get_img(self):
         foto = None
         if self.image_id:
-            return '/static/img_db/' + self.image_id[:2] + '/' + self.image_id[2:4] + '/' + self.image_id
+            return '/static/img2/' + self.image_id[:2] + '/' + self.image_id[2:4] + '/' + self.image_id
 
         if self.image:
             import base64
