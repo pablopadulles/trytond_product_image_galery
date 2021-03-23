@@ -42,7 +42,9 @@ class Product(metaclass=PoolMeta):
     images = fields.One2Many('product.images', 'name', 'Galeria')
 
     def get_image(self):
-        return self.images[0].get_img()
+        if self.images:
+            return self.images[0].get_img()
+        return False
 
 
 class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
