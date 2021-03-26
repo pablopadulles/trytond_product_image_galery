@@ -6,4 +6,9 @@
             <field name="images" colspan="1"/>
         </page>
     </xpath>
+    <xpath expr="/form/field[@name='active']"
+        position="after">
+        <label name="url"/>
+        <field name="url"/>
+    </xpath>
 </data>

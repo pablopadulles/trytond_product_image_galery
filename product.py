@@ -18,6 +18,7 @@ from trytond.tools import lstrip_wildcard
 # from .exceptions import (
 #     Invalidlocation, EraseError)
 from datetime import datetime, timedelta
+import random
 
 from trytond.config import config
 
@@ -35,16 +36,43 @@ class Template(metaclass=PoolMeta):
     def get_image(self):
         return self.products[0].get_image()
 
+    @classmethod
+    def search_random(cls, domain, limit=None):
+        res_all = cls.search(domain)
+        res = []
+        if limit:
+            if len(res_all) <= limit:
+                return res_all
+            for i in range(limit):
+                res.append(res_all.pop(random.randint(0, len(res_all)-1)))
+        else:
+            return res_all
+        return res
+
 
 class Product(metaclass=PoolMeta):
     __name__ = 'product.product'
 
     images = fields.One2Many('product.images', 'name', 'Galeria')
+    url = fields.Char('URL', help="La URL no deve tener espacios ni mayusculas.")
 
     def get_image(self):
         if self.images:
             return self.images[0].get_img()
         return False
+
+    @classmethod
+    def search_random(cls, domain, limit=None):
+        res_all = cls.search(domain)
+        res = []
+        if limit:
+            if len(res_all) <= limit:
+                return res_all
+            for i in range(limit):
+                res.append(res_all.pop(random.randint(0, len(res_all)-1)))
+        else:
+            return res_all
+        return res
 
 
 class ProductImages(sequence_ordered('sequence', 'Orden de Listado'),
