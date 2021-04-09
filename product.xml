@@ -11,6 +11,13 @@ this repository contains the full copyright notices and license terms. -->
             <field name="name">product_view_form_galery</field>
         </record>
 
+        <record model="ir.ui.view" id="product_view_form_simple_galery">
+            <field name="model">product.product</field>
+            <field name="inherit" ref="product.product_view_form_simple"/>
+            <field name="name">product_view_form_simple_galery</field>
+        </record>
+
+
         <!--    product.images -->
         <record model="ir.ui.view" id="product_images_view_form">
             <field name="model">product.images</field>

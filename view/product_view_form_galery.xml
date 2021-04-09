@@ -11,4 +11,7 @@
         <label name="url"/>
         <field name="url"/>
     </xpath>
+    <xpath expr="//field[@name='description']" position="replace_attributes">
+        <field name="description" widget="richtext" toolbar="1"/>
+    </xpath>
 </data>
